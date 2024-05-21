@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://dhr302peiggq4"]
+[gd_scene load_steps=2 format=3 uid="uid://dhr302peiggq4"]
+
+[ext_resource type="Script" path="res://Scripts/Main/Hub.gd" id="1_a63dt"]
 
 [node name="Hub" type="Node2D"]
+script = ExtResource("1_a63dt")
+
+[node name="Click Cooldown" type="Timer" parent="."]
+wait_time = 0.08
+
+[connection signal="timeout" from="Click Cooldown" to="." method="_on_click_cooldown_timeout"]
