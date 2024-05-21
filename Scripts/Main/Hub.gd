@@ -29,7 +29,7 @@ func _input(event):
 			print(str(employees) + " empregados")
 			print(str(fly) + " moscas")
 		else: 
-			sprint("pobre kk")
+			print("pobre kk")
 
 func _on_click_cooldown_timeout():
 	click_disabled = false
