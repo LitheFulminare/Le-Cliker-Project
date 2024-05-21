@@ -25,9 +25,11 @@ func _input(event):
 	if Input.is_action_just_pressed("Buy"):
 		if fly >= 50:
 			fly -= 50
+			employees += 1
 			print(str(employees) + " empregados")
 			print(str(fly) + " moscas")
-			employees += 1
+		else: 
+			sprint("pobre kk")
 
 func _on_click_cooldown_timeout():
 	click_disabled = false
