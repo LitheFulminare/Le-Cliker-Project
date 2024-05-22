@@ -26,8 +26,8 @@ func _input(event):
 
 func buy(choice):
 
-	if fly >= employee.cost:
-		fly -= employee.cost
+	if fly >= int(employee.cost):
+		fly -= int(employee.cost)
 		employee.qtd += 1
 		increace_price(choice)
 		#emp_cost = int(increace_price(choice))
