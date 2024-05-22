@@ -26,14 +26,14 @@ func _input(event):
 
 func buy(choice):
 
-	if fly >= emp_cost:
-		fly -= emp_cost
+	if fly >= employee.cost:
+		fly -= employee.cost
 		employee.qtd += 1
 		increace_price(choice)
 		#emp_cost = int(increace_price(choice))
 		print(str(employee.qtd) + choice)
 		print(str(fly) + " moscas")
-		print("próximo custa: " + str(emp_cost)) # find a way to put choice.cost
+		print("próximo custa: " + str(employee.cost)) # find a way to put choice.cost
 	else: 
 		print("pobre kk")
 
