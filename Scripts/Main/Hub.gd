@@ -6,7 +6,7 @@ var click_disabled = false
 var emp_cost = 50
 var spi_farm_cost = 1500
 
-var employees = 1
+#var employees = 1
 var spider_farm = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -21,19 +21,17 @@ func _input(event):
 		if !click_disabled:
 			click_disabled = true
 			$"Click Cooldown".start()
-			fly += 1 * employees
+			fly += 1 * employee.qtd
 			print(str(fly) + " moscas")
 
 func buy(choice):
-	
-	#var choice = "employee" # "choice" will be defined by which button the player presses
-							# in other words, by what the players chooses to buy
-	
+
 	if fly >= emp_cost:
 		fly -= emp_cost
-		employees += 1
-		emp_cost = int(increace_price(choice))
-		print(str(employees) + choice)
+		employee.qtd += 1
+		increace_price(choice)
+		#emp_cost = int(increace_price(choice))
+		print(str(employee.qtd) + choice)
 		print(str(fly) + " moscas")
 		print("próximo custa: " + str(emp_cost)) # find a way to put choice.cost
 	else: 
@@ -45,13 +43,7 @@ func _on_click_cooldown_timeout():
 func increace_price(choice):
 	match choice:
 		"employee":
-			if employees < 5:
-				emp_cost *= 1.1
-			elif employees < 10:
-				emp_cost *= 1.5
-			else:
-				emp_cost *= 2
-			return emp_cost
+			employee.increase_price()
 
 
 func _on_employees_pressed():

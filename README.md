@@ -7,3 +7,5 @@ funcao dentro de cada objeto q aumenta mais quanto mais tem
 10-20  *2
 
 renda q custa 2k
+
+autoload employee and spider farm to use employee.increase

@@ -1,11 +1,13 @@
 extends Node
 
+var qtd = 1
+var cost = 50
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func increase_price():
+	if qtd < 5:
+		cost *= 1.1
+	elif qtd < 10:
+		cost *= 1.5
+	else:
+		cost *= 2
+	return int(cost)
