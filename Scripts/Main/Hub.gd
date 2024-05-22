@@ -8,10 +8,8 @@ var employees = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
@@ -30,8 +28,8 @@ func _input(event):
 		
 		if fly >= emp_cost:
 			fly -= emp_cost
-			emp_cost = int(emp_cost * 1.1)
 			employees += 1
+			emp_cost = int(increace_price(choice))
 			print(str(employees) + " empregados")
 			print(str(fly) + " moscas")
 			print("próximo custa: " + str(emp_cost))
@@ -40,3 +38,14 @@ func _input(event):
 
 func _on_click_cooldown_timeout():
 	click_disabled = false
+	
+func increace_price(choice):
+	match choice:
+		"employee":
+			if employees < 5:
+				emp_cost *= 1.1
+			elif employees < 10:
+				emp_cost *= 1.5
+			else:
+				emp_cost *= 2
+			return emp_cost
