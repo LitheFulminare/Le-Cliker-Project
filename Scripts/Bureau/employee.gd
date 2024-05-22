@@ -10,4 +10,5 @@ func increase_price():
 		cost *= 1.5
 	else:
 		cost *= 2
-	return int(cost)
+	int(cost)
+	return cost

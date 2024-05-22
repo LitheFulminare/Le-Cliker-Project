@@ -33,7 +33,7 @@ func buy(choice):
 		#emp_cost = int(increace_price(choice))
 		print(str(employee.qtd) + choice)
 		print(str(fly) + " moscas")
-		print("próximo custa: " + str(employee.cost)) # find a way to put choice.cost
+		print("próximo custa: " + str(int(employee.cost))) # find a way to put choice.cost
 	else: 
 		print("pobre kk")
 
