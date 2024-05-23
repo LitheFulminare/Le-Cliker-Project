@@ -1,7 +1,7 @@
 extends Node
 
 var qtd = 0
-var cost = 1000
+var cost = 500
 
 func increace_price():
 	if qtd < 5:

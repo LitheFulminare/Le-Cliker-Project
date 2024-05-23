@@ -2,11 +2,11 @@ extends Node2D
 
 var fly = 0
 var click_disabled = false
+var click_mult = 1
 
 var spider_farm_gain = 0
 var spider_mult = 5
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
@@ -20,8 +20,8 @@ func _input(event):
 		if !click_disabled:
 			click_disabled = true
 			$"Click Cooldown".start()
-			fly += 1 * employee.qtd
-			print(str(fly) + " moscas")
+			fly += 1 * employee.qtd * click_mult
+			#print(str(fly) + " moscas")
 
 func buy(choice):
 	match choice:
