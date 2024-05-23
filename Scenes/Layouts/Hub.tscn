@@ -19,6 +19,7 @@ theme_override_constants/separation = 40
 
 [node name="Employees" type="TextureButton" parent="Control/Button container"]
 layout_mode = 2
+tooltip_text = "Cada empregado dá 1 mosca por clique"
 texture_normal = ExtResource("2_xdl5c")
 
 [node name="Spider Farm" type="TextureButton" parent="Control/Button container"]
@@ -61,13 +62,9 @@ te
 te
 "
 
-[node name="Click Cooldown" type="Timer" parent="."]
-wait_time = 0.08
-
 [node name="Spider farm" type="Timer" parent="."]
 autostart = true
 
 [connection signal="pressed" from="Control/Button container/Employees" to="." method="_on_employees_pressed"]
 [connection signal="pressed" from="Control/Button container/Spider Farm" to="." method="_on_spider_farm_pressed"]
-[connection signal="timeout" from="Click Cooldown" to="." method="_on_click_cooldown_timeout"]
 [connection signal="timeout" from="Spider farm" to="." method="_on_spider_farm_timeout"]

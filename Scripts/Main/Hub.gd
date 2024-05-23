@@ -18,10 +18,7 @@ func _process(delta):
 func _input(event):
 	if Input.is_action_just_pressed("Click"):
 		if !click_disabled:
-			#click_disabled = true
-			#$"Click Cooldown".start()
 			fly += employee.qtd
-			#print(str(fly) + " moscas")
 
 func buy(choice):
 	match choice:
@@ -33,9 +30,6 @@ func buy(choice):
 			spiderfarm.qtd += 1
 		
 	increace_price(choice)
-
-func _on_click_cooldown_timeout():
-	click_disabled = false
 	
 func increace_price(choice):
 	match choice:
