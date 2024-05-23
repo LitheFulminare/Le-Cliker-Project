@@ -1,6 +1,6 @@
 extends Node
 
-var qtd = 1
+var qtd = 0
 var cost = 50
 
 func increase_price():

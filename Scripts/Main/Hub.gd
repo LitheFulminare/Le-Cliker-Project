@@ -1,6 +1,6 @@
 extends Node2D
 
-var fly = 0
+var fly = 50
 var click_disabled = false
 var click_mult = 1
 
@@ -16,11 +16,11 @@ func _process(delta):
 	$"Texto 2".text = "Fazenda de aranhas. \nCusto = " + str(int(spiderfarm.cost)) + "\nQuantidade = " + str(spiderfarm.qtd)
 
 func _input(event):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_action_just_pressed("Click"):
 		if !click_disabled:
-			click_disabled = true
-			$"Click Cooldown".start()
-			fly += 1 * employee.qtd * click_mult
+			#click_disabled = true
+			#$"Click Cooldown".start()
+			fly += employee.qtd
 			#print(str(fly) + " moscas")
 
 func buy(choice):

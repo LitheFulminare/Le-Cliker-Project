@@ -15,6 +15,7 @@ anchors_preset = 0
 layout_mode = 0
 offset_right = 740.0
 offset_bottom = 555.0
+theme_override_constants/separation = 40
 
 [node name="Employees" type="TextureButton" parent="Control/Button container"]
 layout_mode = 2
@@ -50,9 +51,9 @@ te
 
 [node name="Texto 2" type="RichTextLabel" parent="."]
 offset_left = 130.0
-offset_top = 136.0
+offset_top = 176.0
 offset_right = 657.0
-offset_bottom = 263.0
+offset_bottom = 303.0
 theme_override_fonts/normal_font = ExtResource("3_jw33j")
 theme_override_font_sizes/normal_font_size = 40
 text = "Fazenda de aranha
