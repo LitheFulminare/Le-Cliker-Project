@@ -3,18 +3,17 @@ extends Node2D
 var fly = 0
 var click_disabled = false
 
-var emp_cost = 50
-var spi_farm_cost = 1500
-
-#var employees = 1
-var spider_farm = 0
+var spider_farm_gain = 0
+var spider_mult = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _process(delta):
-	pass
+	$Fly.text = "Moscas: " + str(fly)
+	$"Texto 1".text = "Empregado. \nCusto = " + str(int(employee.cost)) + "\nQuantidade = " + str(employee.qtd)
+	$"Texto 2".text = "Fazenda de aranhas. \nCusto = " + str(int(spiderfarm.cost)) + "\nQuantidade = " + str(spiderfarm.qtd)
 
 func _input(event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -25,17 +24,15 @@ func _input(event):
 			print(str(fly) + " moscas")
 
 func buy(choice):
-
-	if fly >= int(employee.cost):
-		fly -= int(employee.cost)
-		employee.qtd += 1
-		increace_price(choice)
-		#emp_cost = int(increace_price(choice))
-		print(str(employee.qtd) + choice)
-		print(str(fly) + " moscas")
-		print("próximo custa: " + str(int(employee.cost))) # find a way to put choice.cost
-	else: 
-		print("pobre kk")
+	match choice:
+		"employee":
+			fly -= int(employee.cost)
+			employee.qtd += 1
+		"spider farm":
+			fly -= int(spiderfarm.cost)
+			spiderfarm.qtd += 1
+		
+	increace_price(choice)
 
 func _on_click_cooldown_timeout():
 	click_disabled = false
@@ -44,15 +41,20 @@ func increace_price(choice):
 	match choice:
 		"employee":
 			employee.increase_price()
+		"spider farm":
+			spiderfarm.increace_price()
 
 
 func _on_employees_pressed():
-	buy("employee")
+	if fly >= employee.cost:
+		buy("employee")
 
 
 func _on_spider_farm_pressed():
-	buy("spider farm")
-
+	if fly >= spiderfarm.cost:
+		buy("spider farm")
 
 func _on_spider_farm_timeout():
-	fly += 1 * spider_farm
+	spider_farm_gain = spider_mult * spiderfarm.qtd
+	$"Control/Button container/Spider Farm".tooltip_text = "Rendendo " + str(spider_farm_gain) + "/s"
+	fly += spider_farm_gain
