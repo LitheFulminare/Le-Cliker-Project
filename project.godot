@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 employee="*res://Scripts/Bureau/employee.gd"
 spiderfarm="*res://Scripts/Bureau/Spider Farm.gd"
+flyhunter="*res://Scripts/Bureau/Fly hunter.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [input]
 

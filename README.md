@@ -9,3 +9,5 @@ funcao dentro de cada objeto q aumenta mais quanto mais tem
 renda q custa 2k
 
 autoload employee and spider farm to use employee.increase
+
+departamento que desbloquea upgrades e skills
