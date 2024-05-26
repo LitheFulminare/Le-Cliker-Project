@@ -28,8 +28,7 @@ func update_text():
 
 func _input(event):
 	if Input.is_action_just_pressed("Click"):
-		if !click_disabled:
-			fly += employee.qtd * employee.bonus * click_mult
+		pass
 
 func buy(choice):
 	match choice:
@@ -83,3 +82,7 @@ func _on_fly_hunter_timeout():
 	fly_hunter_gain = hunter_mult * flyhunter.qtd
 	fly += fly_hunter_gain
 	$"Fly hunter".start()
+
+func _on_click_button_pressed():
+	if !click_disabled:
+			fly += employee.qtd * employee.bonus * click_mult
