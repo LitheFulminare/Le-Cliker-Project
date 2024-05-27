@@ -41,7 +41,7 @@ func buy(choice):
 			if spiderfarm.qtd == 1:
 				$"Spider farm".start()
 		"fly hunter":
-			fly -= int(spiderfarm.cost)
+			fly -= int(flyhunter.cost)
 			flyhunter.qtd += 1
 			if flyhunter.qtd == 1:
 				$"Fly hunter".start()
