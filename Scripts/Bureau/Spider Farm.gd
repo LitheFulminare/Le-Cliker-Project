@@ -12,7 +12,8 @@ func increase_price():
 	else:
 		cost *= 1.4
 		
-	if qtd == 5:
+	if qtd % 5 == 0:
 		bonus += 1
+		
 	int(cost)
 	return cost

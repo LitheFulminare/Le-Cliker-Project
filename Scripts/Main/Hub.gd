@@ -1,6 +1,9 @@
 extends Node2D
 
-@onready var fly = 50
+@onready var fly = 9999 # 50
+
+var gain_per_second = 0.0
+
 var click_disabled = false
 var click_mult = 1
 
@@ -15,6 +18,7 @@ func _ready():
 
 func _process(delta):
 	update_text()
+	calculate_gain_per_sec()
 	
 func update_text():
 	$Fly.text = "Moscas: " + str(int(fly))
@@ -22,13 +26,23 @@ func update_text():
 	$"Texto 2".text = "Fazenda de aranhas. \nCusto: " + str(int(spiderfarm.cost)) + "\nQuantidade:  " + str(spiderfarm.qtd)
 	$"Texto 3".text = "Caçadores de aranhas. \nCusto: " + str(int(flyhunter.cost)) + "\nQuantidade: " + str(flyhunter.qtd)
 	
+	
 	$"Control/Button container/Employees".tooltip_text = "Cada empregado rende " + str(employee.bonus) + " por clique" 
 	$"Control/Button container/Spider Farm".tooltip_text = "Rendendo " + str(spider_farm_gain*10) + "/s"
 	$"Control/Button container/Fly Hunter".tooltip_text = "Rendendo " + str(hunter_mult * flyhunter.qtd) + " a cada 15s"
 
-func _input(event):
-	if Input.is_action_just_pressed("Click"):
-		pass
+	$"VBoxContainer/Gain per click".text = "Ganho por clique: " + str(employee.qtd * employee.bonus * click_mult)
+	$"VBoxContainer/Gain per sec".text = "Ganho médio por segundo: " + str(gain_per_second)
+
+func calculate_gain_per_sec():
+	var sf_per_sec = (spider_mult * spiderfarm.qtd * spiderfarm.bonus) * 10
+	var fh_per_sec = (hunter_mult * flyhunter.qtd) / 15
+	gain_per_second = int( sf_per_sec + fh_per_sec )
+	
+
+#func _input(event):
+	#if Input.is_action_just_pressed("Click"):
+		#pass
 
 func buy(choice):
 	match choice:
