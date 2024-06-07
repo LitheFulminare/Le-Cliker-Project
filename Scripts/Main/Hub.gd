@@ -6,6 +6,7 @@ var gain_per_second = 0.0
 
 var click_disabled = false
 var click_mult = 1
+#var ten_k_milestone = false
 
 var spider_farm_gain = 0
 var spider_mult = 0.5
@@ -29,14 +30,14 @@ func update_text():
 	
 	$"Control/Button container/Employees".tooltip_text = "Cada empregado rende " + str(employee.bonus) + " por clique" 
 	$"Control/Button container/Spider Farm".tooltip_text = "Rendendo " + str(spider_farm_gain*10) + "/s"
-	$"Control/Button container/Fly Hunter".tooltip_text = "Rendendo " + str(hunter_mult * flyhunter.qtd) + " a cada 15s"
+	$"Control/Button container/Fly Hunter".tooltip_text = "Rendendo " + str(hunter_mult * flyhunter.qtd * flyhunter.bonus) + " a cada 15s"
 
 	$"VBoxContainer/Gain per click".text = "Ganho por clique: " + str(employee.qtd * employee.bonus * click_mult)
 	$"VBoxContainer/Gain per sec".text = "Ganho médio por segundo: " + str(gain_per_second)
 
 func calculate_gain_per_sec():
 	var sf_per_sec = (spider_mult * spiderfarm.qtd * spiderfarm.bonus) * 10
-	var fh_per_sec = (hunter_mult * flyhunter.qtd) / 15
+	var fh_per_sec = (hunter_mult * flyhunter.qtd * flyhunter.bonus) / 15
 	gain_per_second = int( sf_per_sec + fh_per_sec )
 	
 
@@ -93,7 +94,7 @@ func _on_fly_hunter_pressed():
 
 
 func _on_fly_hunter_timeout():
-	fly_hunter_gain = hunter_mult * flyhunter.qtd
+	fly_hunter_gain = hunter_mult * flyhunter.qtd * flyhunter.bonus
 	fly += fly_hunter_gain
 	$"Fly hunter".start()
 
