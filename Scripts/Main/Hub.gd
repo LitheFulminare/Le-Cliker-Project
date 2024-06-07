@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var fly = 9999 # 50
+@onready var fly = 50 # 50
 
 var gain_per_second = 0.0
 
