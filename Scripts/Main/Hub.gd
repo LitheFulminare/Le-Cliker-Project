@@ -68,10 +68,14 @@ func check_fly_milestones():
 	if employee_block && spider_farm_block && fly_hunter_block:
 		$"New sector".visible = true
 
-#func _input(event):
-	#if event is InputEventKey and event.is_pressed():
-		#var input_text = $Control/Panel/TextEdit.get_line()
-		#print(input_text)
+func _input(event):
+	if Input.is_action_just_pressed("Confirm"):
+		var input_text = $Control/Panel/cheat.text
+		print(input_text)
+		fly = int(input_text)
+		$Control/Panel/cheat.clear()
+		$Control/Panel.visible = false
+	#if InputEvent
 
 func buy(choice):
 	match choice:
