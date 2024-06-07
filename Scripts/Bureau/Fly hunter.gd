@@ -8,7 +8,7 @@ func increase_price():
 	if qtd < 5:
 		cost *= 1.25
 	elif qtd < 10:
-		cost *= 1.8
+		cost *= 1.5
 	else:
 		cost *= 2.5
 		
