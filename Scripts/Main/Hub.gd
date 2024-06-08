@@ -8,6 +8,8 @@ var click_disabled = false
 var click_mult = 1
 
 var ten_k_milestone = false
+var sector = 1
+var new_sector_cost = 10000
 
 var employee_block = false
 var spider_farm_block = false
@@ -21,6 +23,7 @@ var hunter_mult = 250
 
 func _ready():
 	$"New sector".visible = false
+	$Control/Panel.visible = false
 
 func _process(delta):
 	update_text() # updates tooltip and cost/profit numbers
@@ -29,13 +32,13 @@ func _process(delta):
 	check_fly_milestones() # check milestones (10K, 100K, etc) and makes the NewSec button visible
 	
 func update_text():
-	if fly < 10000:
+	if fly < new_sector_cost:
 		$Fly.text = "Moscas: " + str(int(fly))
 	else:
-		$Fly.text = "Moscas: 10000"
-	$"Texto 1".text = "Empregado. \nCusto: " + str(int(employee.cost)) + "\nQuantidade: " + str(employee.qtd)
-	$"Texto 2".text = "Fazenda de aranhas. \nCusto: " + str(int(spiderfarm.cost)) + "\nQuantidade:  " + str(spiderfarm.qtd)
-	$"Texto 3".text = "Caçadores de aranhas. \nCusto: " + str(int(flyhunter.cost)) + "\nQuantidade: " + str(flyhunter.qtd)
+		$Fly.text = "Moscas: " + str(new_sector_cost)
+	$"Texto 1".text = "Empregado. \nCusto: " + str(int(employee.cost)) + "\nQuantidade: " + str(employee.qtd)+ "/" + str(employee.cap)
+	$"Texto 2".text = "Fazenda de aranhas. \nCusto: " + str(int(spiderfarm.cost)) + "\nQuantidade:  " + str(spiderfarm.qtd) + "/" + str(spiderfarm.cap)
+	$"Texto 3".text = "Caçadores de aranhas. \nCusto: " + str(int(flyhunter.cost)) + "\nQuantidade: " + str(flyhunter.qtd) + "/" + str(flyhunter.cap)
 	
 	
 	$"Control/Button container/Employees".tooltip_text = "Cada empregado rende " + str(employee.bonus) + " por clique" 
@@ -51,22 +54,35 @@ func calculate_gain_per_sec():
 	gain_per_second = int( sf_per_sec + fh_per_sec )
 
 func qtd_limit(): # makes the icon translucid and unclickable upon reaching the cap
-	if employee.qtd == 10:
+	if employee.qtd == employee.cap:
 		$"Control/Button container/Employees".self_modulate = Color(1, 1, 1, 0.3)
 		employee_block = true
-	if spiderfarm.qtd == 10:
+	else:
+		$"Control/Button container/Employees".self_modulate = Color(1, 1, 1, 1)
+		employee_block = false
+		
+	if spiderfarm.qtd == spiderfarm.cap:
 		$"Control/Button container/Spider Farm".self_modulate = Color(1, 1, 1, 0.3)
 		spider_farm_block = true
-	if flyhunter.qtd == 5:
+	else: 
+		$"Control/Button container/Spider Farm".self_modulate = Color(1, 1, 1, 1)
+		spider_farm_block = false
+		
+	if flyhunter.qtd == flyhunter.cap:
 		$"Control/Button container/Fly Hunter".self_modulate = Color(1, 1, 1, 0.3)
 		fly_hunter_block = true
+	else:
+		$"Control/Button container/Fly Hunter".self_modulate = Color(1, 1, 1, 1)
+		fly_hunter_block = false
 
 func check_fly_milestones():
-	if fly > 10000: # 10K
-		fly = 10000 # 10 K
+	#if sector == 1: # fly cap, initially 10K
+	if fly > new_sector_cost:
+		fly = new_sector_cost
 	
 	if employee_block && spider_farm_block && fly_hunter_block:
-		$"New sector".visible = true
+		if sector == 1:
+			$"New sector".visible = true
 
 func _input(event):
 	if Input.is_action_just_pressed("Confirm"):
@@ -75,7 +91,12 @@ func _input(event):
 		fly = int(input_text)
 		$Control/Panel/cheat.clear()
 		$Control/Panel.visible = false
-	#if InputEvent
+	if Input.is_action_just_pressed("Cheat Console"):
+		if !$Control/Panel.visible:
+			$Control/Panel.visible = true
+		else: 
+			$Control/Panel.visible = false
+			$Control/Panel/cheat.clear()
 
 func buy(choice):
 	match choice:
@@ -142,7 +163,7 @@ func _on_click_button_pressed():
 
 
 func _on_new_sector_mouse_entered():
-	if fly < 10000:
+	if fly < new_sector_cost:
 		$"New sector".self_modulate = Color(0.9, 0.1, 0.1)
 	else:
 		$"New sector".self_modulate = Color(0, 1, 0.016)
@@ -150,3 +171,15 @@ func _on_new_sector_mouse_entered():
 
 func _on_new_sector_mouse_exited():
 	$"New sector".self_modulate = Color(1, 1, 1)
+
+
+func _on_new_sector_pressed():
+	print("new sector pressed")
+	if fly == new_sector_cost:
+		fly -= new_sector_cost
+		new_sector_cost *= 10
+		sector += 1
+		$"New sector".visible = false
+		employee.cap *= 2
+		spiderfarm.cap *= 2
+		flyhunter.cap *= 2
